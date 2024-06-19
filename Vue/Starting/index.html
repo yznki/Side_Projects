@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Test</title>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <script src="https://kit.fontawesome.com/adea463b9c.js" crossorigin="anonymous"></script>
+    <style>
+        body {
+            background-color: #eee;
+            max-width: 960px;
+            margin: 20px auto;
+        }
+
+        p,
+        h3,
+        ul {
+            margin: 0;
+            padding: 0;
+        }
+
+        li {
+            list-style-type: none;
+            background: #fff;
+            margin: 20px auto;
+            padding: 10px 20px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        li.fav {
+            background-color: #ff90e2;
+            color: white;
+        }
+
+        .box {
+            background-color: lightgray;
+            padding: 100px 0px;
+            width: 500px;
+            text-align: center;
+            margin: 20px;
+            display: inline-block;
+        }
+
+        li img {
+            width: 200px;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="app">
+
+        <!-- Data Binding -->
+        <a :href="url">Go to Google</a>
+
+        <br><br>
+
+        <!-- Showing and IF Conditions -->
+        <div v-show="showBooks">
+            <h2>{{ bookTitle }}</h2>
+            <p>{{ author }}</p>
+            <p>{{ age }}</p>
+            <button @click="age++">Increase Age</button>
+            <button @click="age--">Decrease Age</button>
+            <button @click="changeTitle()">Change Title Here</button>
+        </div>
+
+        <button @click="showData()">
+            <span v-if="!showBooks">Show Data</span><span v-else>Hide Data</span>
+        </button>
+
+        <br><br>
+
+        <!-- For Loops -->
+        <div>
+            <ul>
+                <li v-for="book in books" :key="book.id" :class="{ fav: book.isFav }">
+                    <img :src="book.img" alt="bookImage">
+                    <h3>{{book.title}}</h3>
+                    <p>{{ book.author }}</p>
+                    <p>{{ book.datePublished }}</p>
+                    <i style="cursor: pointer;" @click="toggleFav(book)" :class="`${book.isFav ? 'fa-solid' : 'fa-regular'} fa-heart`"></i>
+                    
+                </li>
+            </ul>
+        </div>
+
+        <br><br>
+
+        <!-- Mouse Events -->
+        <div class="box" @mouseover="handleEvent">Mouse Over</div>
+        <div class="box" @mouseleave="handleEvent">Mouse Leave</div>
+        <div class="box" @dblclick="handleEvent">Double Click</div>
+        <div class="box" @mousemove="handleMouseMove">Position of mouse, x: {{x}} y: {{y}}</div>
+
+    </div>
+    <script src="app.js"></script>
+</body>
+
+</html>
